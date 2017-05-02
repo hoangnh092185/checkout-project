@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
-import ReactCSSTranitionGroup from 'react-addons-css-transition-group';
-import ImagePreview from './components/ImagePreviewArea/ImagePreview';
-import Checkout from './components/CheckoutArea/Checkout';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import ImagePreview from './components/ImagePreviewArea/ImagePreview'
+import Checkout from './components/CheckoutArea/Checkout'
 
 
 var Overlay = React.createClass({
@@ -23,32 +23,31 @@ var Container = React.createClass({
     )
   }
 });
-
 var Header = React.createClass({
 
-  render: function(){
+  render: function() {
     return (
       <header>
         <input onChange={this.props.onChange}
           type="range"
           max="100"
           min="1"
-          step="1"
-          />
+          step="1" />
       </header>
     );
   }
 });
 
 var App = React.createClass({
-  getInitial: function(){
-    return({
+
+  getInitialState: function() {
+    return ({
       mounted: false,
       people: 1,
       price: 320.00,
-      tax: 15,
+      tax: 20,
       duration: 5,
-      discount: 5,
+      discount: 5
     });
   },
 
@@ -72,7 +71,6 @@ var App = React.createClass({
       overlay = (
         <Overlay image="https://a0.muscache.com/airbnb/static/engagement/overlay_panel7-58b03c50e1eac957ec12f6ced3bf7872.jpg" />
       );
-
       container = (
         <Container>
           <ImagePreview price={this.state.price}
@@ -80,29 +78,28 @@ var App = React.createClass({
             people={this.state.people}
             image="https://a0.muscache.com/airbnb/static/engagement/overlay_panel7-58b03c50e1eac957ec12f6ced3bf7872.jpg" />
           <Checkout duration={this.state.duration}
-            discount={this.state.discount}
-            tax={this.state.tax}
+            discount={this.state.discount} tax={this.state.tax}
             price={this.state.price}
             onSubmit={this.handleSubmit} />
         </Container>
       );
     }
-    return (
+
+    return(
       <div className="App">
-      <ReactCSSTranitionGroup transitionName="overlay"
-        transitionEnterTimeout={500}
-        tranistionLeaveTimeout={300}>
-        {overlay}
-      </ReactCSSTranitionGroup>
-        <ReactCSSTranitionGroup transitionName="container"
+        <ReactCSSTransitionGroup transitionName="overlay"
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={300}>
+          {overlay}
+        </ReactCSSTransitionGroup>
+        <ReactCSSTransitionGroup transitionName="container"
           transitionEnterTimeout={500}
           transitionLeaveTimeout={300}>
           {container}
-        </ReactCSSTranitionGroup>
+        </ReactCSSTransitionGroup>
         <Header onChange={this.handleChange} />
       </div>
     );
   }
 });
-
-export default App;
+export default App
