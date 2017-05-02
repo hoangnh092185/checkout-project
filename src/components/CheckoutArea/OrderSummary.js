@@ -27,26 +27,26 @@ var OrderSummary = React.createClass({
           <tbody>
             <tr>
               <td>{this.props.price} x {duration}</td>
-              <td>{initialTotal} GBP</td>
+              <td>{initialTotal} USD</td>
             </tr>
             <tr>
               <td>Discount</td>
-              <td>{discount} GBP</td>
+              <td>{discount} USD</td>
             </tr>
             <tr>
               <td>Subtotal</td>
-              <td>{subTotal} GBP</td>
+              <td>{subTotal} USD</td>
             </tr>
             <tr>
               <td>Tax</td>
-              <td>{tax} GBP</td>
+              <td>{tax} USD</td>
             </tr>
           </tbody>
         </table>
         <div className="Total">
           <div className="TotalLabel">Total</div>
           <div className="Amount">
-            {total} <small>GBP</small>
+            {total} <small>USD</small>
           </div>
         </div>
       </div>
