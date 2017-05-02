@@ -1,10 +1,28 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import ReactCSSTranitionGroup from 'react-addons-css-transition-group';
 import ImagePreview from './components/ImagePreviewArea/ImagePreview';
 import Checkout from './components/CheckoutArea/Checkout';
 
+
+var Overlay = React.createClass({
+  render: function() {
+    return (
+      <div className="Overlay" style={{'backgroundImage':'url(' + this.props.image + ')'}}>
+        Something
+      </div>
+    );
+  }
+});
+var Container = React.createClass({
+    render: function() {
+    return (
+      <div className="Container">
+        {this.props.children}
+      </div>
+    )
+  }
+});
 
 var Header = React.createClass({
 
@@ -34,28 +52,41 @@ var App = React.createClass({
     });
   },
 
-  handleChange: function(e){
+  componentDidMount: function() {
+    this.setState({ mounted: true });
+  },
+
+  handleSubmit: function(e) {
+    console.log('handle ajax submission here');
+    e.preventDefault();
+  },
+
+  handleChange: function(e) {
     this.setState({ duration: e.target.value });
   },
 
-  render() {
-    overlay = (
-      <OverLay image="https://a0.muscache.com/airbnb/static/engagement/overlay_panel7-58b03c50e1eac957ec12f6ced3bf7872.jpg" />
-    );
+  render: function() {
 
-    container = (
-      <Container>
-        <ImagePreview price={this.state.price}
-          duration={this.state.duration}
-          people={this.state.people}
-          image="https://a0.muscache.com/airbnb/static/engagement/overlay_panel7-58b03c50e1eac957ec12f6ced3bf7872.jpg" />
-        <Checkout duration={this.state.duration}
-          discount={this.state.discount}
-          tax={this.state.tax}
-          price={this.state.price}
-          onSubmit={this.handleSubmit} />
-      </Container>
-    );
+    var overlay, container;
+    if(this.state.mounted) {
+      overlay = (
+        <Overlay image="https://a0.muscache.com/airbnb/static/engagement/overlay_panel7-58b03c50e1eac957ec12f6ced3bf7872.jpg" />
+      );
+
+      container = (
+        <Container>
+          <ImagePreview price={this.state.price}
+            duration={this.state.duration}
+            people={this.state.people}
+            image="https://a0.muscache.com/airbnb/static/engagement/overlay_panel7-58b03c50e1eac957ec12f6ced3bf7872.jpg" />
+          <Checkout duration={this.state.duration}
+            discount={this.state.discount}
+            tax={this.state.tax}
+            price={this.state.price}
+            onSubmit={this.handleSubmit} />
+        </Container>
+      );
+    }
     return (
       <div className="App">
       <ReactCSSTranitionGroup transitionName="overlay"

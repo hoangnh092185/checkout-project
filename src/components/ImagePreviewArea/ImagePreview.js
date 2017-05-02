@@ -1,5 +1,5 @@
 import React from 'react';
-import * as Cloudbnb from './CloudbnbComponent';
+import * as Cloudbnb from './CloudbnbComponents';
 
 var ImagePreview = React.createClass({
   render: function() {
